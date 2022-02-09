@@ -32,5 +32,4 @@ public class GenericDao {
     return sessionFactory.getCurrentSession();
   }
 
-
 }

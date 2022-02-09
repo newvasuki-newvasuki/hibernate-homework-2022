@@ -1,5 +1,6 @@
 package ru.hh.school.service;
 
+
 import org.hibernate.LazyInitializationException;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -91,7 +92,7 @@ public class EmployerServiceTest extends BaseTest {
 
     Employer savedEmployer = employerService.getById(employer.getId());
 
-    savedEmployer.getVacancies().get(0).getTitle();
+    assertEquals("Vacancy",savedEmployer.getVacancies().get(0).getTitle());
   }
 
   @Test
