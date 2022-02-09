@@ -52,6 +52,8 @@ public class EmployerService {
   public void blockIfEmployerUseBadWords(int employerId) {
     Employer employer = transactionHelper.inTransaction(() -> employerDao.getEager(employerId));
 
+
+
     if (!checkIfWordIsBad(employer.getCompanyName())) {
       return;
     }
@@ -69,6 +71,7 @@ public class EmployerService {
     transactionHelper.inTransaction(() -> {
       employer.setBlockTime(LocalDateTime.now());
       employer.getVacancies().forEach(v -> v.setArchivingTime(LocalDateTime.now()));
+      employerDao.UpdateEmployer(employer);
     });
   }
 

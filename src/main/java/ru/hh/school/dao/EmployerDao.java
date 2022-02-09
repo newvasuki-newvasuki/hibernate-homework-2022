@@ -18,8 +18,18 @@ public class EmployerDao extends GenericDao {
    */
   public Employer getEager(int employerId) {
     return getSession()
-        .createQuery("from Employer employer", Employer.class)
-        .getSingleResult();
+        .createQuery("select employer "+
+                        "from Employer employer "+
+                        "join fetch employer.vacancies "+
+                        "where employer.id = :paramId", Employer.class)
+            .setParameter("paramId",employerId)
+            .getSingleResult();
+  }
+
+  //поскольку метод getSession объявлен protected, придётся создать метод для обновления связи
+  // сущности employer в классе EmployerDao
+  public void UpdateEmployer(Employer employer){
+    getSession().update(employer);
   }
 
 }
